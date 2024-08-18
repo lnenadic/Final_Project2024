@@ -22,19 +22,20 @@ SOURCES_LIST = [IMAGE, VIDEO, WEBCAM]
 
 # Images config
 IMAGES_DIR = ROOT / 'images'
-DEFAULT_IMAGE = IMAGES_DIR / 'image_1.jpg'
-DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'image1_detected.jpeg'
+DEFAULT_IMAGE = IMAGES_DIR / 'img-1.jpg'
+DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'img-1-detected.jpg'
 
 # Videos config
 VIDEO_DIR = ROOT / 'videos'
 VIDEOS_DICT = {
-    'video_1': VIDEO_DIR / 'video_1.mp4',
+    'vid_1': VIDEO_DIR / 'vid_1.mp4',
+    'vid_2': VIDEO_DIR / 'vid_2.mp4',
 }
 
 # ML Model config
 MODEL_DIR = ROOT / 'weights'
 DETECTION_MODEL = MODEL_DIR / 'custom-model.pt'
-SEGMENTATION_MODEL = MODEL_DIR / 'yolov8n-seg.pt'
+SEGMENTATION_MODEL = MODEL_DIR / 'custom-seg.pt'
 
 # Webcam
 WEBCAM_PATH = 0
