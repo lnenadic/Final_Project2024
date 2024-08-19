@@ -47,7 +47,9 @@ nbconvert==7.16.4
 nbformat==5.10.4
 networkx==3.3
 numpy==1.26.4
+opencv-contrib-python==4.8.1.78
 opencv-python==4.10.0.84
+opencv-python-headless==4.8.1.78
 packaging==24.0
 pafy==0.5.5
 pandas==2.2.2
