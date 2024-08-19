@@ -38,4 +38,4 @@ DETECTION_MODEL = MODEL_DIR / 'custom-model.pt'
 SEGMENTATION_MODEL = MODEL_DIR / 'custom-seg.pt'
 
 # Webcam
-WEBCAM_PATH = 0
+WEBCAM_PATH = 1
