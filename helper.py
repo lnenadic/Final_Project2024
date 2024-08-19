@@ -58,18 +58,22 @@ def play_stored_video(conf, model):
 
 def play_webcam(conf, model):
     try:
-        vid_cap = cv2.VideoCapture(settings.WEBCAM_PATH)
+        # Try accessing the first webcam (index 0)
+        vid_cap = cv2.VideoCapture(0)
+
+        # Check if the webcam is opened successfully
+        if not vid_cap.isOpened():
+            st.sidebar.error(
+                "Webcam not accessible. Please check the connection and try again.")
+            return
+
         st_frame = st.empty()
-        while (vid_cap.isOpened()):
+        while vid_cap.isOpened():
             success, image = vid_cap.read()
             if success:
-                _display_detected_frames(conf,
-                                         model,
-                                         st_frame,
-                                         image,
-                                         )
+                _display_detected_frames(conf, model, st_frame, image)
             else:
-                vid_cap.release()
                 break
+        vid_cap.release()
     except Exception as e:
         st.sidebar.error("Error accessing webcam: " + str(e))
