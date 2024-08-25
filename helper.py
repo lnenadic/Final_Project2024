@@ -1,10 +1,8 @@
-# helper functions to load the YOLOv8 model, preprocess the input image or video,
-# and post-process the output bounding boxes and class labels
-
 from ultralytics import YOLO
 import streamlit as st
 import cv2
 import settings
+import PIL
 
 
 def load_model(model_path):
@@ -57,23 +55,32 @@ def play_stored_video(conf, model):
 
 
 def play_webcam(conf, model):
-    try:
-        # Try accessing the first webcam (index 0)
-        vid_cap = cv2.VideoCapture(0)
+    # Use the st.camera_input widget to capture an image from the webcam
+    st.markdown("<h2>Webcam Feed</h2>", unsafe_allow_html=True)
 
-        # Check if the webcam is opened successfully
-        if not vid_cap.isOpened():
-            st.sidebar.error(
-                "Webcam not accessible. Please check the connection and try again.")
-            return
+    # Capture an image from the webcam
+    img_data = st.camera_input("Capture an image")
 
-        st_frame = st.empty()
-        while vid_cap.isOpened():
-            success, image = vid_cap.read()
-            if success:
-                _display_detected_frames(conf, model, st_frame, image)
-            else:
-                break
-        vid_cap.release()
-    except Exception as e:
-        st.sidebar.error("Error accessing webcam: " + str(e))
+    if img_data is not None:
+        # Open the image with PIL
+        uploaded_image = PIL.Image.open(img_data)
+
+        # Display the captured image
+        st.image(uploaded_image, caption="Captured Image",
+                 use_column_width=True)
+
+        # Perform object detection using the YOLOv8 model
+        res = model.predict(uploaded_image, conf=conf)
+        res_plotted = res[0].plot()[:, :, ::-1]
+
+        # Display the detected objects
+        st.image(res_plotted, caption='Detected Image', use_column_width=True)
+
+        try:
+            with st.expander("Detection Results"):
+                boxes = res[0].boxes
+                for box in boxes:
+                    st.write(box.data)
+        except Exception as ex:
+            st.error("Error processing detection results.")
+            st.error(ex)
