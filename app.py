@@ -24,7 +24,8 @@ st.set_page_config(
 )
 
 # Main page heading
-st.title("Object Detection And Tracking using YOLOv8")
+st.title("Object Detection And Segmentation using YOLOv8")
+st.subheader("Trained for Mobile Phones 📱 and Watches ⏱️")
 
 # Sidebar
 st.sidebar.header("ML Model Config")
@@ -95,7 +96,7 @@ if source_radio == settings.IMAGE:
                 try:
                     with st.expander("Detection Results"):
                         for box in boxes:
-                            st.write(box.data)
+                            pass
                 except Exception as ex:
                     # st.write(ex)
                     st.write("No image is uploaded yet!")
