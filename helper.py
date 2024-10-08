@@ -65,10 +65,6 @@ def play_webcam(conf, model):
         # Open the image with PIL
         uploaded_image = PIL.Image.open(img_data)
 
-        # Display the captured image
-        st.image(uploaded_image, caption="Captured Image",
-                 use_column_width=True)
-
         # Perform object detection using the YOLOv8 model
         res = model.predict(uploaded_image, conf=conf)
         res_plotted = res[0].plot()[:, :, ::-1]

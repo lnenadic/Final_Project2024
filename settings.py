@@ -30,6 +30,7 @@ VIDEO_DIR = ROOT / 'videos'
 VIDEOS_DICT = {
     'vid_1': VIDEO_DIR / 'vid_1.mp4',
     'vid_2': VIDEO_DIR / 'vid_2.mp4',
+    'vid_3': VIDEO_DIR / 'vid_3.mp4',
 }
 
 # ML Model config
